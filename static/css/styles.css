@@ -1,0 +1,70 @@
+header{
+	background-color: black;
+	margin:0px;
+}
+
+#h3_id{
+	margin-right: 10%;
+	margin-left: 10%;
+	margin-top: 0px
+}
+
+nav{
+	background-color: #FFCC00 ;
+	margin-right: 10%;
+	margin-left: 10%
+}
+
+p{
+	color: #A9A9A9;
+}
+h2{
+	color: #FFCC00;
+}
+
+#footer_info{
+	position: relative;
+   	bottom: 0;
+   	left: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+#copyright_info{
+	background-color: #191919;height: 50px
+}
+
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}
+
+
+.header_b_style{
+	color:black;
+}
+
+
+table.table-bordered td,th{
+	text-align: center;
+}
+
+table.table-bordered th{
+	background-color: #FFBB07;
+}
+
+table.table-bordered{
+    border: 2px solid black;
+}
+
+table.table-bordered > thead > tr > th{
+    border:	2px solid black;
+    color: black;
+}
+
+table.table-bordered > tbody > tr > td{
+    border:2px solid black;
+    color: black;
+}

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block head %}
+{% block title %}Deposit Page{% endblock %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block body %}
+{% include "header_cashier.html" %}
+<br>
+<div style="flex-grow: 1">
+<div class="panel panel-default" style="border: 0px;width:28%;background:white;margin:auto;">
+        <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Deposit Money</b></div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="deposit_form" style="padding: auto" method="POST" action="">
+                <div class="form-group">
+                    <label class="control-label col-md-6" style="text-align: left;padding-left:20%">Customer ID </label>
+                    <div class="col-md-6">
+                            <!-- 
+                                This label should display the Customer ID
+                            -->
+                        <input name = "customer_id" class="form-control" style=" box-sizing: border-box;" readonly value={{account[0]}}></input>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-6" style="text-align: left;padding-left:20%">Account ID </label>
+                    <div class="col-md-6">
+                            <!-- 
+                                This label should display the Account ID
+                            -->
+                        <input name="acc_id" class="form-control" style=" box-sizing: border-box;" readonly value={{account[1]}}></input>
+                    
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-6" style="text-align: left;padding-left:20%">Account Type</label>
+                    <div class="col-md-6">
+                            <!-- 
+                                This label should display the Account Type
+                            -->
+                        <input name="acc_type" class="form-control" style=" box-sizing: border-box;" readonly value={{account[2]}}></input>
+                    
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-6" style="text-align: left;padding-left:20%">Balance</label>
+                    <div class="col-md-6">
+                            <!-- 
+                                This label should display the account balance
+                            -->
+                        <input name="acc_bal" class="form-control" style=" box-sizing: border-box;" readonly value={{account[3]}}></input>
+                    </div>
+                </div>
+                <div class="form-group ">
+                    <label class="control-label col-md-6" style="text-align: left;">Deposit Amount : </label>
+                    <div class="col-md-6">
+                        <input type="number" class="form-control" name="deposit_amount" style=" box-sizing: border-box;" required >
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-md-6">
+                    <center><a href="{{ url_for('accountDetails') }}" name="cancel" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Cancel</a></center>
+                    </div>
+                    <div class="col-md-6">
+                    <center><button type="submit" name="submit" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Submit</button></center>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+<!--
+    If deposit successful display this
+-->
+<!-- <div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
+        <div class="panel-body">
+            <label class="control-label col-md-12 " style="text-align: center;font-size: 18px">Amount deposited successfully</label>
+        </div>
+</div> -->
+<br>
+<div class="panel panel-default" style="border: 0px;width:35%;background:white;margin:auto;">
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-md-12">
+                <center><a href="{{ url_for('accountDetails') }}" name="back" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Back</a></center>
+                </div>
+            </div>
+        </div>
+</div>
+  
+</div>
+{% include "footer.html" %}
+{% endblock %}

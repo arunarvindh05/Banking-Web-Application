@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block head %}
+{% block title %}Customer Status{% endblock %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block body %}
+{% include "header.html" %}
+<div style="flex-grow: 1">
+    <div class="panel panel-default" style="border: 0px;width:70%;background:white;margin:auto;">
+        <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px;padding-top: 3%"><b>Customer Status</b></div>
+            <div class="panel-body">        
+            <table class="table table-bordered" id="c_stat">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Customer SSN ID</th>
+                    <th>Status</th>
+                    <th>Message</th>
+                    <th>Last Updated</th>
+                    <th>Operations</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for each in data %}
+                         <tr><td>{{each[0]}}</td><td>{{each[1]}}</td><td>{{each[2]}}</td><td>{{each[3]}}</td><td>{{each[4]}}</td><td><a href='{{ url_for('customerStatus') }}'><u><b>Refresh</b></u></a></td></tr>           
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}
+{% endblock %}
+
+

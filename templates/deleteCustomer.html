@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% block head %}
+{% block title %}Delete Customer{% endblock %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block body %}
+{% include "header.html" %}
+<div style="flex-grow: 1">
+<!--
+    here error msg should be displayed if customer not found
+-->
+<div class="panel panel-default" style="border: 0px;width:60%;background:white;margin:auto;padding-top:2%">
+        <div class="panel-body" style="border: 0px">
+        {% if error %}
+            <center><p class=error><strong>Error:</strong> {{ error }}<center>
+        {% endif %}
+        {% if message %}
+            <center><p class=error><strong>Messaage:</strong> {{ message }}<center>
+        {% endif %}
+            <form class="form-horizontal" style="padding: auto" name="data_fetch" method="POST">
+                <br>
+                 <div class="form-group required">
+                    <label class="control-label col-md-3" style="text-align: right;">Customer SSN ID : </label>
+                    <div class="col-md-3">
+                        <!-- 
+                        User will enter this value
+                        -->
+                        <input type="number" minlength="9" style="text-align: left;"  maxlength="9" class="form-control"style=" box-sizing: border-box" value="Current" name="delete_ssn_id">
+                    </div>
+                    <label class="control-label- col-md-1" style="text-align: center;padding: 1%;text-align: center">OR</label>
+                    <label class="control-label col-md-2">Customer ID : </label>
+                    <div class="col-md-3">
+                        <!-- 
+                            User will enter this value
+                        -->
+                        <input type="number" minlength="9" maxlength="9" class="form-control"style=" box-sizing: border-box;" value="Current" name="delete_acc_id">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                    <center><button type="submit" name="data_fetch_btn" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Submit</button></center>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    <!-- 
+    If record exists then below html code will be displayed
+
+    -->
+    {% if ssn_id %}
+<div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
+        <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Delete Customer</b></div>
+        <div class="panel-body">
+            <form class="form-horizontal" style="padding: auto" method="POST">
+                <br>
+                 <div class="form-group">
+                    <label class="control-label col-md-4" style="text-align: left;">SSN Id:</label>
+                    <div class="col-md-6">
+                        <!-- Customer SSN id 
+                        should come from database 
+                    
+                        -->
+                        <input type="number" name="cust_ssn_id" class="form-control"style=" box-sizing: border-box;" value={{ssn_id}} readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4" style="text-align: left;">Customer ID:</label>
+                    <div class="col-md-6">
+                        <!-- Customer SSN id  
+                        should come from database 
+                        
+                        -->
+                        <input type="number" name="cust_id" class="form-control"style=" box-sizing: border-box;" value={{cust_id}} readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4" style="text-align: left;">Customer Name:</label>
+                    <div class="col-md-6">
+                        <!-- Customer name 
+                        should come from database 
+                        -->
+                        <input type="text" name="cust_name" class="form-control"style=" box-sizing: border-box;" value={{name}} readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4" style="text-align: left;">Age:</label>
+                    <div class="col-md-6">
+                        <!-- Age  
+                        should come from database 
+                        Eg: Current /Savings
+                        -->
+                        <input type="number" name="cust_age" class="form-control"style=" box-sizing: border-box;" value={{age}} readonly>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="control-label col-md-4" style="text-align: left;">Address:</label>
+                    <div class="col-md-6">
+                        <!-- This value determines the type of selected account 
+                        should come from database 
+                        Eg: Current /Savings
+                        -->
+                        <input type="text"name="cust_address"  class="form-control"style=" box-sizing: border-box;" value={{address}} readonly>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-md-6">
+                    <button type="submit" name="sub_btn" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Confirm Delete</button>
+                    </div>
+                    <div class="col-md-6">
+                    <a href="/link-to/whatever-address/" name="cancel" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+    {%endif%}
+    </div>
+{% include "footer.html" %}
+{% endblock %}

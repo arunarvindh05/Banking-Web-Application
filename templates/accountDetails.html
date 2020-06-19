@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block head %}
+{% block title %}Account Details{% endblock %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+{% block body %}
+{% include "header_cashier.html" %}
+<br>
+<div style="flex-grow: 1">
+<!--
+    here error msg should be displayed if customer not found
+-->
+<div class="panel panel-default" style="border: 0px;width:60%;background:white;margin:auto;padding-top:1%">
+        <div class="panel-body" style="border: 0px">
+        {% if error %}
+        <center><p class=error><strong>Error:</strong> {{ error }}<center>
+{% endif %}
+{% if message %}
+        <center><p class=error><strong>Messaage:</strong> {{ message }}<center>
+{% endif %}
+            <center><p>
+            <form class="form-horizontal" style="padding: auto" name="data_fetch" method="POST">
+                <br>
+                 <div class="form-group required">
+                    <label class="control-label col-md-3" style="text-align: right;">Customer SSN ID : </label>
+                    <div class="col-md-3">
+                        <!--
+                        User will enter this value
+                        -->
+                        <input type="number" style="text-align: left;" class="form-control"style=" box-sizing: border-box" value="Current" name="cust_id">
+                    </div>
+                    <label class="control-label- col-md-1" style="text-align: center;padding: 1%;text-align: center">OR</label>
+                    <label class="control-label col-md-2">SSN ID : </label>
+                    <div class="col-md-3">
+                        <!--
+                            User will enter this value
+                        -->
+                        <input type="number" minlength="9" maxlength="9" class="form-control"style=" box-sizing: border-box;" value="Current" name="cust_ssn_id">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                    <center><button type="submit" name="view_details_btn" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">View Details</button></center>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>
+
+{%if accounts%}
+<div class="panel panel-default" style="border: 0px;width:32%;background:white;margin:auto;">
+        <div class="panel-body" style="border: 0px">
+            <form class="form-horizontal" name="view_account_details_form"  style="padding: auto" method="POST">
+                <br>
+                <div class="form-group required">
+                    <label class="control-label col-md-6" style="text-align: center;">Select an account : </label>
+                    <div class="col-md-6">
+                        <!-- This data should come from database
+                        Account IDs of current customer should be displayed
+                        -->
+                        <select class="form-control" name="account_list">
+						  {% for acc in accounts %}
+                                <option>{{acc[1]}}</option>
+                            {% endfor %}
+						</select>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                    <center><button type="submit" name="view_account_details_btn" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">View Account Details</button></center>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>
+{%endif%}
+
+
+{%if account%}
+<div class="panel panel-default" style="border: 0px;width:28%;background:white;margin:auto;">
+        <div class="panel-heading" style="border: 0px;background-image:none;background:white;color:black;text-align: center;font-size: 25px"><b>Account Details</b></div>
+        <div class="panel-body">
+            <form class="form-horizontal" name="display_details_form" style="padding: auto" method="POST" action="">
+                <div class="form-group">
+                    <label class="control-label col-md-6" style="text-align: left;padding-left:20%">Customer ID </label>
+                    <div class="col-md-6">
+                            <!--
+                                This label should display the Customer ID
+                            -->
+                        <input name = "cust_id" class="form-control" style=" box-sizing: border-box;" readonly value={{account[0]}}></input>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-6" style="text-align: left;padding-left:20%">Account ID </label>
+                    <div class="col-md-6">
+                            <!--
+                                This label should display the Account ID
+                            -->
+                        <input name="acc_id" class="form-control" style=" box-sizing: border-box;" readonly value={{account[1]}}></input>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-6" style="text-align: left;padding-left:20%">Account Type</label>
+                    <div class="col-md-6">
+                            <!--
+                                This label should display the Account Type
+                            -->
+                        {%if account[6] == "S" %}<input name="acc_type" class="form-control" style=" box-sizing: border-box;" readonly value="Savings"></input>{%endif%}
+                        {%if account[6] == "C" %}<input name="acc_type" class="form-control" style=" box-sizing: border-box;" readonly value="Current"></input>{%endif%}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-6" style="text-align: left;padding-left:20%">Balance</label>
+                    <div class="col-md-6">
+                            <!--
+                                This label should display the account balance
+                            -->
+                        <input name="acc_bal" class="form-control" style=" box-sizing: border-box;" readonly value={{account[2]}}></input>
+                    </div>
+                </div>
+                <br>
+
+                    <div class="col-md-4">
+                    <center><button type="submit" name="action" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px" value="Deposit">Deposit</button></center>
+                    </div>
+                    <div class="col-md-4">
+                    <center><button type="submit" name="action" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px"value="Transfer">Transfer</button></center>
+                    </div>
+                    <div class="col-md-4">
+                    <center><button type="submit" name="action" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px"value="Withdraw">Withdraw</button></center>
+                    </div>
+
+
+
+                    <!-- <div class="col-md-4">
+                    <a href="{{ url_for('cashier_deposit') }}" name="action" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Deposit</a>
+                    </div>
+                    <div class="col-md-4">
+                    <a href="{{ url_for('cashier_withdraw') }}" name="action" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Withdraw</a>
+                    </div>
+                    <div class="col-md-4">
+                    <a href="{{ url_for('cashier_transfer') }}" name="action" class="btn btn-default" style="background-color: black;color:#FFCC00;border: 2px solid #433937;font-size: 15px">Transfer</a>
+                    </div> -->
+
+            </form>
+            </form>
+        </div>
+</div>
+<br>
+</div>
+{%endif%}
+{% include "footer.html" %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block head %}
+{% block title %}Login Page{% endblock %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="panel panel-default" style="border: 2px solid #433937;width:25%;margin:13% auto">
+        <div class="panel-heading" style="background-image:none;background:#433937;color:white"><b>Login </b></div>
+        <div class="panel-body">
+        {% if error %}
+            <p class=error><strong>Error:</strong> {{ error }}
+        {% endif %}
+            <form class="form-horizontal" style="border:0px" method="POST">
+                <br>
+                <div class="form-group">
+                    
+                    <div class="col-md-12">
+                        <input type="text" class="form-control" name="username" placeholder="Username" required >
+                    </div>
+                </div>
+                <div class="form-group">
+                    
+                    <div class="col-md-12">
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                    <center><button type="submit" class="btn btn-default" style="border: 2px solid #433937">Login</button></center>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
